@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>$interpolate usage</title>
+		<script src="js/angularJS.js"></script>
+	</head>
+	<body>
+		<div ng-app="MyApp">
+			<div ng-controller="MyController">
+				<input ng-model="myName" type="text" placeholder="Type your name" />
+				<textarea ng-model="myTextarea" cols="30" rows="10"></textarea>
+				<div ng-bind="interpolateValue"></div>
+			</div>
+		</div>
+		
+		<script type="text/javascript">
+			var app=angular.module("MyApp",[]);
+			app.config(["$interpolateProvider", function($interpolateProvider){
+				$interpolateProvider.startSymbol("$");
+				$interpolateProvider.endSymbol("$");
+			}]).controller("MyController",function($scope, $interpolate){
+				$scope.$watch("myTextarea", function(newVal, oldVal, scope){
+					var interpolatedFunc=$interpolate(newVal);
+					$scope.interpolateValue=interpolatedFunc({myName: $scope.myName});
+				});
+			});
+		</script>
+	</body>
+</html>

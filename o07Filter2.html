@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>过滤器实例</title>
+		<link rel="stylesheet" type="text/css" href="css/foundation.css"/>
+		<script type="text/javascript" src="js/angularJS.js" ></script>
+	</head>
+	<body>
+		<form name="signup_form" novalidate="novalidate" ng-submit="signupForm()">
+			<fieldset>
+				<legend>Signup</legend>
+				<div class="row">
+					<div class="large-12 columns">
+						<label>Your Name: </label>
+						<input type="text" name="name" placeholder="Name" ng-model="signup.name" ng-minlegth="3" ng-maxlength="20" required="required" />
+						<div class="error" ng-show="signup_form.name.$dirty && signup_form.name.$invalid">
+							<small class="error" ng-show="signup_name.name.$error.required">
+								Your name is required.
+							</small>
+							<small class="error" ng-show="signup_name.name.$error.minlength">
+								Your name is reqired 3 letters.
+							</small>
+							<small class="error" ng-show="signup_name.name.$error.maxlength">
+								Your name is more than 20 letters.
+							</small>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="large-12 columns">
+						<label>Your Email: </label>
+						<input type="email" placeholder="Email" name="email" ng-model="signup.email" ng-minlength="3" ng-maxlength="20" required="required" />
+						<div class="error" ng-show="signup_name.email.$dirty && signup_name.email.$invalid">
+							<small class="error" ng-show="signup_name.email.$error.required">
+								Your email is required.
+							</small>
+							<small class="error" ng-show="signup_name.email.$error.minlength">
+								Your email is reqired 3 letters.
+							</small>
+							<small class="error" ng-show="signup_name.email.$error.maxlength">
+								Your email is more than 20 letters.
+							</small>
+						</div>
+					</div>
+				</div>
+				<button type="submit" class="button radius">Submit</button>
+			</fieldset>
+		</form>
+	</body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html ng-app="app">
+	<head>
+		<meta charset="UTF-8">
+		<title>控制器</title>
+		<script src="js/angularJS.js"></script>
+	</head>
+	<body>
+		<div ng-controller="FirstController">
+			<h4>the simplest addmachine</h4>
+			<button ng-click="add(1)" class="button">add</button>
+			<a ng-click="substruct(1)" class="button alert">substruct</a>
+			<h4>cuttent count: {{counter}}</h4>
+		</div>
+		
+		<div ng-controller="ParentController">
+			<div ng-controller="ChildController">
+				<a ng-click="SayHello()">SayHello!!!</a>
+			</div>
+			{{person}}
+		</div>
+		
+		<div ng-controller="NameController">
+			<input ng-model="FirstName" type="text" placeholder="FN" />
+			<input ng-model="LastName" type="text" placeholder="LN" />
+			{{FullName()}}
+		</div>
+		
+		
+		<script type="text/javascript">
+			var app=angular.module("app",[]);
+			app.controller("FirstController", function($scope){
+				$scope.counter=0;
+				$scope.add=function(amount){$scope.counter+=amount};
+				$scope.substruct=function(amount){$scope.counter-=amount};
+			})
+			
+			app.controller("ParentController", function($scope){
+				$scope.person={greeted: true};
+			});
+			app.controller("ChildController", function($scope){
+				$scope.SayHello=function(){
+					$scope.person.name="yyz";//此作用域没有person，到上一级找
+				};
+			});
+			
+			app.controller("NameController", function($scope){
+				$scope.FirstName="yz";
+				$scope.LastName="yu";
+				$scope.FullName=function(){
+					return $scope.FirstName+" "+$scope.LastName;
+				};
+			});
+		</script>
+	</body>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>作用域</title>
+		<script src="js/angularJS.js"></script>
+	</head>
+	<body>
+		<div ng-app="myApp">
+			<div ng-controller="myController">
+				<h1>Hello,, {{name}}</h1>
+			</div>
+			<div ng-controller="ListController">
+				<li ng-repeat="i in names">{{i}}</li>
+			</div>
+		</div>
+		
+<!--脚本区域-->
+		<script type="text/javascript">
+			var app=angular.module("myApp",[])
+			app.controller("myController",
+			function($scope){
+				$scope.name="2ss33";
+			});
+			//ng-repeat每个重复项都访问了当前的重复对象
+			app.controller("ListController",
+			function($scope){
+				$scope.names=[1, 2, 3, "string", {"a":1}];
+			});
+		</script>
+	</body>
+</html>

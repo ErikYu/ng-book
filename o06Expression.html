@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html ng-app="app">
+	<head>
+		<meta charset="UTF-8">
+		<title>表达式</title>
+		<script type="text/javascript" src="js/angularJS.js" ></script>
+	</head>
+	<body>
+		<!--解析AngularJS表达式-->
+		<div ng-controller="MyController">
+			<input ng-model="expr" type="text" placeholder="Enter an expression" />
+			<h2>{{parsedValue}}</h2>
+		</div>
+		<!--插值字符串-->
+		<div ng-controller="InsertController">
+			<input ng-model="to" type="email" placeholder="Recipient" />
+			<textarea ng-model="emailBody"></textarea>
+			<pre>{{previewText}}</pre>
+		</div>
+<!--脚本-->
+		<script type="text/javascript">
+//			解析AngularJS表达式
+			var app=angular.module("app", []);
+			app.controller("MyController",
+			function($scope, $parse){
+				$scope.$watch("expr", function(newVal, oldVal, scope){
+					if (newVal !== oldVal) {
+						console.log("new: "+newVal);
+						console.log("old: "+oldVal);
+						var parseFun=$parse("expr");
+						$scope.parsedValue=parseFun(scope);
+					}
+				});
+			});
+//			插值字符串
+/*书上的方法*/
+app.controller('InsertController', 
+    function($scope, $interpolate) {
+      $scope.to = 'ari@fullstack.io';
+      $scope.emailBody = 'Hello {{ to }},\n\nMy name is Ari too!';
+      // Set up a watch
+      $scope.$watch('emailBody', function(boody) {
+        if (boody) {
+          var template = $interpolate(boody);
+          $scope.previewText = 
+            template({to: $scope.to});
+        }
+      });
+});
+
+//			app.controller("InsertController",
+//			function($scope, $interpolate){
+//				//获得访问这两个服务的权限
+//				//设置监听
+//				$scope.$watch("emailBody", function(body){
+//					if (body) {
+//						var template=$interpolate(body);
+//						$scope.previewText=template({to: $scope.to});
+//						console.log($scope.previewText);
+//					}
+//				})
+//			});	
+		</script>
+	</body>
+</html>
