@@ -5,23 +5,25 @@
 		<title>过滤器实例</title>
 		<link rel="stylesheet" type="text/css" href="css/foundation.css"/>
 		<script type="text/javascript" src="js/angularJS.js" ></script>
+		<script type="text/javascript" src="js/o07.2.js" ></script>
+		<link rel="stylesheet" type="text/css" href="css/o07.2.css"/>
 	</head>
 	<body>
-		<form name="signup_form" novalidate="novalidate" ng-submit="signupForm()">
+		<form ng-app="app" name="signup_form" novalidate="novalidate" ng-submit="signupForm()" ng-controller="signupController">
 			<fieldset>
 				<legend>Signup</legend>
 				<div class="row">
 					<div class="large-12 columns">
 						<label>Your Name: </label>
-						<input type="text" name="name" placeholder="Name" ng-model="signup.name" ng-minlegth="3" ng-maxlength="20" required="required" />
+						<input type="text" name="name" placeholder="Name" ng-model="signup.name" ng-minlength="3" ng-maxlength="20" required="required" />
 						<div class="error" ng-show="signup_form.name.$dirty && signup_form.name.$invalid">
-							<small class="error" ng-show="signup_name.name.$error.required">
+							<small class="error" ng-show="signup_form.name.$error.required">
 								Your name is required.
 							</small>
-							<small class="error" ng-show="signup_name.name.$error.minlength">
+							<small class="error" ng-show="signup_form.name.$error.minlength">
 								Your name is reqired 3 letters.
 							</small>
-							<small class="error" ng-show="signup_name.name.$error.maxlength">
+							<small class="error" ng-show="signup_form.name.$error.maxlength">
 								Your name is more than 20 letters.
 							</small>
 						</div>
@@ -31,20 +33,38 @@
 					<div class="large-12 columns">
 						<label>Your Email: </label>
 						<input type="email" placeholder="Email" name="email" ng-model="signup.email" ng-minlength="3" ng-maxlength="20" required="required" />
-						<div class="error" ng-show="signup_name.email.$dirty && signup_name.email.$invalid">
-							<small class="error" ng-show="signup_name.email.$error.required">
+						<div class="error" ng-show="signup_form.email.$dirty && signup_form.email.$invalid">
+							<small class="error" ng-show="signup_form.email.$error.required">
 								Your email is required.
 							</small>
-							<small class="error" ng-show="signup_name.email.$error.minlength">
+							<small class="error" ng-show="signup_form.email.$error.minlength">
 								Your email is reqired 3 letters.
 							</small>
-							<small class="error" ng-show="signup_name.email.$error.maxlength">
+							<small class="error" ng-show="signup_form.email.$error.maxlength">
 								Your email is more than 20 letters.
+							</small>
+							<small class="error" ng-show="signup_form.email.$error.email">
+								Your email is wrong format.
+							</small>
+						</div>
+					</div>
+					<div class="large-12 columns">
+						<label>UserName: </label>
+						<input type="text" name="username" placeholder="Desired Username" ng-model="signup.username" ng-minlength="3" ng-maxlength="20" ensure-unique="username" required="required" />
+						<div class="error" ng-show="signup_form.username.$dirty && signup_form.username.$invalid">
+							<small class="error" ng-show="signup_form.username.$error.required">
+								Username is required.
+							</small>
+							<small class="error" ng-show="signup_form.username.$error.minlength">
+								Your username is reqired 3 letters.
+							</small>
+							<small class="error" ng-show="signup_form.username.$error.maxlength">
+								Your username is more than 20 letters.
 							</small>
 						</div>
 					</div>
 				</div>
-				<button type="submit" class="button radius">Submit</button>
+				<button type="submit" class="button radius" ng-disabled="signup_form.$invalid">Submit</button>
 			</fieldset>
 		</form>
 	</body>

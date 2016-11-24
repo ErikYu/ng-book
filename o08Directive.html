@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+	<head>
+		<meta charset="UTF-8">
+		<title指令</title>
+		<script src="js/angularJS.js"></script>
+		<script type="text/javascript" src="js/o08.js"></script>
+	</head>
+	<body>
+		<my-directive>Clickk</my-directive>
+		<p>We can access: {{ rootProperty }}</p>
+		<div ng-controller="ParentController">
+			<p>We can access: {{ rootProperty }} and {{ parentProperty }}</p>
+			<div ng-controller="ChildController">
+				<p>We can access{{ rootProperty }} and {{ parentProperty }} and {{ childProperty }}</p>
+				<!--<p>{{fullSentenceFromChild}}</p>-->
+			</div>
+		</div>
+		<div sec-directive my-url="http://www.baidu.com" my-url-text="go to zhi hu">
+			
+		</div>
+	</body>
+</html>
